@@ -8,8 +8,6 @@ import matricesDispersas.Tripleta;
 
 /**
  * MatrizEnTripleta dispersa representada en forma de tripletas.
- *
- * @author camilo
  */
 public class MatrizEnTripleta {
 

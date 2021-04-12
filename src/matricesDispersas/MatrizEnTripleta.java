@@ -4,6 +4,7 @@ package matricesDispersas;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 import matricesDispersas.Tripleta;
 
 /**
@@ -51,8 +52,8 @@ public class MatrizEnTripleta {
     }
 
     public void asignaNumeroTripletas(int datos) {
-        System.out.println("Antiguo número de tripletas: " + numeroTripletas());
-        System.out.println("Nuevo número de tripletas: " + datos);
+        //System.out.println("Antiguo número de tripletas: " + numeroTripletas());
+        //System.out.println("Nuevo número de tripletas: " + datos);
         int antiguo;
         antiguo = numeroTripletas();
         aux = v;
@@ -85,7 +86,7 @@ public class MatrizEnTripleta {
             }
             f = v[i].retornaFila();
             c = v[i].retornaColumna();
-            val = (Double) v[i].retornaValor();
+            val = (int) v[i].retornaValor();
             //Necesaria modificación para GUI.
             System.out.println(Integer.toString(f) + ", " + Integer.toString(c) + ", " + Double.toString(val));
         }
@@ -117,7 +118,7 @@ public class MatrizEnTripleta {
     /**
      * Inserta la tripleta t en su lugar correspondiente. La matriz está
      * ordenada por filas y luego por columnas de menor a mayor.
-     *
+     * <p>
      * Tripleta a insertar.
      */
     public void insertaTripleta(Tripleta ti) {
@@ -154,4 +155,63 @@ public class MatrizEnTripleta {
         }
         return 0;
     }
+
+    public boolean existe(int fila, int columna) {
+        if (fila < 0 || columna < 0) {
+            return false;
+        }
+        int i = 1;
+        Tripleta ti = this.retornaTripleta(1);
+        // && i <= (int) this.retornaTripleta(0).retornaValor()
+        while (ti != null) {
+            if (ti.retornaFila() == fila && ti.retornaColumna() == columna) {
+                return true;
+            }
+            i++;
+            ti = this.retornaTripleta(i);
+        }
+        return false;
+    }
+
+    //busca un elemento con las fila y columna enviadas, retorna cero si no existe
+    public int buscarPosicion(int fila, int columna) {
+        int indice = 1;
+        Tripleta t = this.retornaTripleta(1);
+        while (indice < this.numeroTripletas() && (t.retornaFila() != fila || t.retornaColumna() != columna)) {
+            indice++;
+            if(indice < this.numeroTripletas()){
+                t = this.retornaTripleta(indice);
+            }
+        }
+        if(indice > this.numeroTripletas()){ //cuidado con el cero
+            return 0;
+        }
+        else {
+            return indice;
+        }
+    }
+
+    public void mostrarMatrizCuadricula(){
+        int[][] x = new int[v[0].retornaFila()][v[0].retornaColumna()];
+
+        for (int i = 1; i <= this.numeroTripletas() ; i++) {
+            Tripleta t = this.retornaTripleta(i);
+            int f = t.retornaFila();
+            int c = t.retornaColumna();
+            x[f-1][c-1] = (int) t.retornaValor();
+        }
+
+        for (int i = 0; i < x.length ; i++) {
+            for (int j = 0; j < x[0].length ; j++) {
+                if(x[i][j]==-1){
+                    System.out.print(" x ");
+                }
+                else{
+                    System.out.print(" "+x[i][j]+" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
 }

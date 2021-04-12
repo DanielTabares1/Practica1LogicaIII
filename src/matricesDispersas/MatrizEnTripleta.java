@@ -120,7 +120,7 @@ public class MatrizEnTripleta {
      * Inserta la tripleta t en su lugar correspondiente. La matriz está
      * ordenada por filas y luego por columnas de menor a mayor.
      *
-     * @param t Tripleta a insertar.
+     * Tripleta a insertar.
      */
     public void insertaTripleta(Tripleta ti) {
         int i, j, datos;

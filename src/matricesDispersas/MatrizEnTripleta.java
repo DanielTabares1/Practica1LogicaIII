@@ -214,4 +214,16 @@ public class MatrizEnTripleta {
         }
     }
 
+    //obtiene el valor almacenado en i,j
+    public int getDato(int f, int c){
+        if(buscarPosicion(f,c)==0){
+            return 0;
+        }
+        else{
+            Tripleta t = v[buscarPosicion(f,c)];
+            int d = (int)t.retornaValor();
+            return d;
+        }
+    }
+
 }

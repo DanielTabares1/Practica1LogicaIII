@@ -1,28 +1,20 @@
-import Model.Casilla;
+package Controller;
+
 import matricesDispersas.MatrizEnTripleta;
 import matricesDispersas.Tripleta;
 
 import java.util.Random;
-import java.util.Vector;
 
 public class Implementacion {
 
-    public static void main(String[] args) {
+    public static MatrizEnTripleta m;
+    public static int minas, filas, columnas;
 
-        // se reciben datos y crea matriz
-            //todo--------------recibir datos de la interfaz
+    public static void principal() {
 
-            /*
-            después de recibir los datos creamos el tablero y se pueden presentar los siguientes casos:
-            -si oprime una celda con mina pierde, se muestra el tablero completo
-            -una celda con cero revela todas las celdas con cero a su alrededor y los numeros adyacentes a estas
-            -una celda con numero se muestra ella solita
-            -todas las celdas con numero están destapadas => gana, se muestra el tablero...
-             */
-
-        int filas = 8, columnas = 8, minas = 10;
+        //se reciben dato se crea la matriz
         Tripleta t = new Tripleta(filas, columnas, 0);
-        MatrizEnTripleta m = new MatrizEnTripleta(t);
+        m = new MatrizEnTripleta(t);
         Random r = new Random();
 
         //se generan las minas de forma aleatoria
@@ -54,7 +46,6 @@ public class Implementacion {
         }
         System.out.println("Matriz con todos los valores");
         m.mostrarMatrizCuadricula();
-
         //lo siguiente es: el juego
     }
 
@@ -87,5 +78,18 @@ public class Implementacion {
         }   //inf der
         return suma;
     }
+
+    //recibe y define valores de fila, columna y minas
+    public static void setValores(int f, int c, int m) {
+        filas = f;
+        columnas = c;
+        minas = m;
+        principal();
+    }
+
+    public static int datoCasilla(int f, int c){
+        return m.getDato(f,c);
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package Controller;
 
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,8 +12,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Controller {
-    int filas, columnas, minas;
+    int filas, columnas, minas; //se definen variables de filas, columnas y minas
 
+
+    //se establece conección con la interfaz gráfica
     @FXML
     private TextField filas_id;
     @FXML
@@ -22,6 +25,7 @@ public class Controller {
     @FXML
     private Button dimensionesButton;
 
+    //acción sobre el botón fácil
     public void facil_action() throws IOException {
         activarBotones(false);
         filas = 8;
@@ -30,6 +34,7 @@ public class Controller {
         lanzarJuego(new Stage());
     }
 
+    //acción sobre el botón medio
     public void medio_action() throws IOException {
         activarBotones(false);
         filas = 16;
@@ -38,6 +43,7 @@ public class Controller {
         lanzarJuego(new Stage());
     }
 
+    //acción sobre el botón difícil
     public void dificil_action() throws IOException {
         activarBotones(false);
         filas = 16;
@@ -46,16 +52,19 @@ public class Controller {
         lanzarJuego(new Stage());
     }
 
+    //acción sobre el botón personalizado
     public void personalizado_action() {
-        activarBotones(true);
+        activarBotones(true); //activa los campos y botón para dimensiones personalizadas
     }
 
+    //activa o desactiva los botones de facil. medio y dificil
     public void activarBotones(boolean b) {
         filas_id.setDisable(!b);
         columnas_id.setDisable(!b);
         dimensionesButton.setDisable(!b);
     }
 
+    //acción del botón iniciar (personalizado)
     public void iniciar_action() throws IOException {
         System.out.println("acción");
         filas = Integer.parseInt(filas_id.getText());
@@ -64,12 +73,14 @@ public class Controller {
         lanzarJuego(new Stage());
     }
 
+    //lanza el juego en una nueva ventana
     public void lanzarJuego(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../View/juego.fxml"));
         primaryStage.setScene(new Scene(root, 800, 500));
         primaryStage.setTitle("Jueguito");
         primaryStage.show();
-        juegoController.setValores(filas,columnas,minas);
+        juegoController.setValores(filas, columnas, minas);
+        Implementacion.setValores(filas, columnas, minas);
     }
 
 

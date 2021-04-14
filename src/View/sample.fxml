@@ -17,15 +17,17 @@
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
                 <Button fx:id="facil_button" mnemonicParsing="false" onAction="#facil_action" text="Fácil" />
-                  <Button fx:id="medio_button" mnemonicParsing="false" text="Medio" />
-                  <Button fx:id="dificil_button" mnemonicParsing="false" text="Difícil" />
-                  <Button fx:id="personalizado_button" mnemonicParsing="false" text="Personalizado" />
+                  <Button fx:id="medio_button" mnemonicParsing="false" onAction="#medio_action" text="Medio" />
+                  <Button fx:id="dificil_button" mnemonicParsing="false" onAction="#dificil_action" text="Difícil" />
+                  <Button fx:id="personalizado_button" mnemonicParsing="false" onAction="#personalizado_action" text="Personalizado" />
               </buttons>
             </ButtonBar>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField disable="true" />
-                  <Button disable="true" mnemonicParsing="false" text="Button" />
+                  <TextField fx:id="filas_id" disable="true" />
+                  <TextField fx:id="columnas_id" disable="true" />
+                  <TextField fx:id="minas_id" />
+                  <Button fx:id="dimensionesButton" disable="true" mnemonicParsing="false" onAction="#iniciar_action" text="iniciar" />
                </children>
             </HBox>
          </children>

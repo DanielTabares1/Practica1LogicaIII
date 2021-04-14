@@ -58,16 +58,27 @@ public class juegoController {
             case 0:
                 break;
             case -1:
+                int[][] v = Implementacion.minas();
+                for (int i = 1; i <= v.length ; i++) {
+                    //panelPrincipal.getChildren().get(f*c-1);
+                    System.out.println((v[i-1][0]-1)*columnas+v[i-1][1]-1);
+                }
                 break;
-            default: b.setText(d+"");break;
+            default:
+                b.setText(d+"");
+                disenoBotonNumero(b);break;
         }
     }
 
     //se cambia el estilo del botón
-    public  void disenoBoton(Button b){
+    public void disenoBotonNumero(Button b){
         b.setDisable(true);
-        b.setStyle("-fx-background-color: #cd5c5c;" +
-                "-fx-border-color: #000000");
+        b.setStyle("-fx-background-color: #7ed960; -fx-border-color: #000000");
     }
+
+    public void disenoBotonMina(Button b){
+
+    }
+
 
 }

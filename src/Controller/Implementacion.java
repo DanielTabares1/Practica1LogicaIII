@@ -91,5 +91,19 @@ public class Implementacion {
         return m.getDato(f,c);
     }
 
+    public static int[][] minas(){
+        int[][] v = new int[minas][2];
+        Tripleta t;
+        int contador = 0;
+        for (int i = 1; i <= m.numeroTripletas() ; i++) {
+            t=m.retornaTripleta(i);
+            if((int)t.retornaValor()==-1){
+                v[contador][0] = t.retornaFila();
+                v[contador][1] = t.retornaColumna();
+                contador++;
+            }
+        }
+        return v;
+    }
 
 }

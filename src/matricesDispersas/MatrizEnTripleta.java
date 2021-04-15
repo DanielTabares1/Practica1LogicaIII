@@ -157,7 +157,7 @@ public class MatrizEnTripleta {
     }
 
     public boolean existe(int fila, int columna) {
-        if (fila < 0 || columna < 0) {
+        if (fila <= 0 || columna <= 0 || fila > this.numeroFilas() || columna > this.numeroColumnas()) {
             return false;
         }
         int i = 1;
@@ -191,6 +191,24 @@ public class MatrizEnTripleta {
         }
     }
 
+    public int buscarIndice(int fila, int columna) {
+        int indice = 1;
+        Tripleta t = this.retornaTripleta(1);
+        while (indice < this.numeroTripletas() && (t.retornaFila() != fila || t.retornaColumna() != columna)) {
+            indice++;
+            if(indice < this.numeroTripletas()){
+                t = this.retornaTripleta(indice);
+            }
+        }
+        if(indice == this.numeroTripletas()){ //cuidado con el cero
+            return 0;
+        }
+        else {
+            return indice;
+        }
+    }
+
+
     public void mostrarMatrizCuadricula(){
         int[][] x = new int[v[0].retornaFila()][v[0].retornaColumna()];
 
@@ -216,11 +234,11 @@ public class MatrizEnTripleta {
 
     //obtiene el valor almacenado en i,j
     public int getDato(int f, int c){
-        if(buscarPosicion(f,c)==0){
+        if(buscarIndice(f,c)==0){
             return 0;
         }
         else{
-            Tripleta t = v[buscarPosicion(f,c)];
+            Tripleta t = v[buscarIndice(f,c)];
             int d = (int)t.retornaValor();
             return d;
         }

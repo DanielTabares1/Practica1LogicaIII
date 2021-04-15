@@ -244,4 +244,15 @@ public class MatrizEnTripleta {
         }
     }
 
+    public int getDatoBoton(int f, int c){
+        if(buscarPosicion(f,c)==0){
+            return 0;
+        }
+        else{
+            Tripleta t = v[buscarPosicion(f,c)];
+            int d = (int)t.retornaValor();
+            return d;
+        }
+    }
+
 }

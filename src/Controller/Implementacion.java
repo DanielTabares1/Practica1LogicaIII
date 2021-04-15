@@ -36,7 +36,7 @@ public class Implementacion {
         for (int i = 1; i <= filas; i++) {
             for (int j = 1; j <= columnas; j++) {
                 if (!m.existe(i, j)) {
-                    int n = minasAlRededor(m, i, j);
+                    int n = minasAlRededor(i, j);
                     if (n != 0) {
                         Tripleta x = new Tripleta(i, j, n);
                         m.insertaTripleta(x);
@@ -50,43 +50,43 @@ public class Implementacion {
     }
 
     //método que cuenta la cantidad de minas al rededor de una casilla
-    public static int minasAlRededor(MatrizEnTripleta m, int fila, int columna) {
+    public static int minasAlRededor(int fila, int columna) {
         int suma = 0;
-        if (m.existe(fila - 1, columna - 1) && (int) m.retornaTripleta(m.buscarPosicion(fila-1,columna-1)).retornaValor() == -1 ) {
+        if (m.existe(fila - 1, columna - 1) && (int) m.retornaTripleta(m.buscarPosicion(fila - 1, columna - 1)).retornaValor() == -1) {
             suma++;
-            System.out.println("f:"+fila + "c:" +columna + "sup izq");
+            System.out.println("f:" + fila + "c:" + columna + "sup izq");
         }    //sup izq
-        if (m.existe(fila - 1, columna) && (int) m.retornaTripleta(m.buscarPosicion(fila-1,columna)).retornaValor() == -1 ) {
+        if (m.existe(fila - 1, columna) && (int) m.retornaTripleta(m.buscarPosicion(fila - 1, columna)).retornaValor() == -1) {
             suma++;
-            System.out.println("f:"+fila + "c:" +columna + "sup");
+            System.out.println("f:" + fila + "c:" + columna + "sup");
         }    //sup
-        if (m.existe(fila - 1, columna + 1) && (int) m.retornaTripleta(m.buscarPosicion(fila-1,columna+1)).retornaValor() == -1 ) {
+        if (m.existe(fila - 1, columna + 1) && (int) m.retornaTripleta(m.buscarPosicion(fila - 1, columna + 1)).retornaValor() == -1) {
             suma++;
-            System.out.println("f:"+fila + "c:" +columna + "sup der");
+            System.out.println("f:" + fila + "c:" + columna + "sup der");
 
         }   //sup der
-        if (m.existe(fila, columna - 1) && (int) m.retornaTripleta(m.buscarPosicion(fila,columna-1)).retornaValor() == -1 ) {
+        if (m.existe(fila, columna - 1) && (int) m.retornaTripleta(m.buscarPosicion(fila, columna - 1)).retornaValor() == -1) {
             suma++;
-            System.out.println("f:"+fila + "c:" +columna + "izq");
+            System.out.println("f:" + fila + "c:" + columna + "izq");
         }          //izq
-        if (m.existe(fila, columna + 1) && (int) m.retornaTripleta(m.buscarPosicion(fila,columna+1)).retornaValor() == -1 ) {
+        if (m.existe(fila, columna + 1) && (int) m.retornaTripleta(m.buscarPosicion(fila, columna + 1)).retornaValor() == -1) {
             suma++;
-            System.out.println("f:"+fila + "c:" +columna + "der");
+            System.out.println("f:" + fila + "c:" + columna + "der");
 
         }          //der
-        if (m.existe(fila + 1, columna - 1) && (int) m.retornaTripleta(m.buscarPosicion(fila+1,columna-1)).retornaValor() == -1 ) {
+        if (m.existe(fila + 1, columna - 1) && (int) m.retornaTripleta(m.buscarPosicion(fila + 1, columna - 1)).retornaValor() == -1) {
             suma++;
-            System.out.println("f:"+fila + "c:" +columna + "inf izq");
+            System.out.println("f:" + fila + "c:" + columna + "inf izq");
 
         }   //inf izq
-        if (m.existe(fila + 1, columna) && (int) m.retornaTripleta(m.buscarPosicion(fila+1,columna)).retornaValor() == -1 ) {
+        if (m.existe(fila + 1, columna) && (int) m.retornaTripleta(m.buscarPosicion(fila + 1, columna)).retornaValor() == -1) {
             suma++;
-            System.out.println("f:"+fila + "c:" +columna + "inf");
+            System.out.println("f:" + fila + "c:" + columna + "inf");
 
         }              //inf
-        if (m.existe(fila + 1, columna + 1) && (int) m.retornaTripleta(m.buscarPosicion(fila+1,columna+1)).retornaValor() == -1 ) {
+        if (m.existe(fila + 1, columna + 1) && (int) m.retornaTripleta(m.buscarPosicion(fila + 1, columna + 1)).retornaValor() == -1) {
             suma++;
-            System.out.println("f:"+fila + "c:" +columna + "inf der");
+            System.out.println("f:" + fila + "c:" + columna + "inf der");
 
         }   //inf der
         return suma;
@@ -100,17 +100,21 @@ public class Implementacion {
         principal();
     }
 
-    public static int datoCasilla(int f, int c){
-        return m.getDato(f,c);
+    public static int datoCasilla(int f, int c) {
+        return m.getDato(f, c);
     }
 
-    public static int[][] minas(){
+    public static int datoBoton(int f, int c) {
+        return m.getDatoBoton(f, c);
+    }
+
+    public static int[][] minas() {
         int[][] v = new int[minas][2];
         Tripleta t;
         int contador = 0;
-        for (int i = 1; i <= m.numeroTripletas() ; i++) {
-            t=m.retornaTripleta(i);
-            if((int)t.retornaValor()==-1){
+        for (int i = 1; i <= m.numeroTripletas(); i++) {
+            t = m.retornaTripleta(i);
+            if ((int) t.retornaValor() == -1) {
                 v[contador][0] = t.retornaFila();
                 v[contador][1] = t.retornaColumna();
                 contador++;

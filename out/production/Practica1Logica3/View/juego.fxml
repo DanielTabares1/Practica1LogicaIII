@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -8,10 +9,14 @@
       <VBox layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <Pane fx:id="panelPrincipal" prefHeight="440.0" prefWidth="780.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#comenzar_action" text="Abrir tablero:" />
-               </children></HBox>
+                  <Button fx:id="abrir_id" mnemonicParsing="false" onAction="#comenzar_action" text="Abrir tablero:" />
+                  <Button fx:id="cerrar_id" mnemonicParsing="false" onAction="#cerrar_action" text="Cerrar" visible="false" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></HBox>
          </children>
       </VBox>
    </children>

@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
+import javax.swing.*;
+
 public class juegoController {
 
     @FXML
@@ -14,12 +16,13 @@ public class juegoController {
     private Button abrir_id;
 
     public double hPanel, wPanel, hBoton, wBoton;   //variables del tamaño de panel  y botones
-    public static int minas, filas, columnas;       //filas, columnas y # de minas de la matriz
+    public static int minas, filas, columnas, contador;       //filas, columnas y # de minas de la matriz
 
     //llena el panel con la cantidad de botones necesarios según las dimensiones de la matriz
     public void comenzar_action() {
 
         abrir_id.setVisible(false);
+
 
         //se hacen calculos para el tamaño ideal de los botones según las dimensiones de la matriz
         hPanel = panelPrincipal.getHeight();
@@ -52,6 +55,7 @@ public class juegoController {
         filas = f;
         columnas = c;
         minas = m;
+        contador = f * c;
     }
 
     //detecta el click sobre una casilla y recibe el id del botón presionado
@@ -66,6 +70,7 @@ public class juegoController {
                 disenoBotonCero(b);
                 abrirCeros(f, c);
                 //abrirPistas(f, c);
+                revisarContador();
                 break;
             case -1:
                 panelPrincipal.setDisable(true);
@@ -77,20 +82,26 @@ public class juegoController {
                     //boton.setDisable(true);
                     boton.setStyle("-fx-background-color: #a42200;-fx-text-fill: white; -fx-border-color: #000000");
                 }
+                JOptionPane.showMessageDialog(null,"¡Lo sentimos!\nHas perdido la partida unu\nVuelve a intentarlo");
                 break;
             default:
                 b.setText(d + "");
                 disenoBotonNumero(b);
+                revisarContador();
                 break;
         }
+
     }
 
     //se cambia el estilo del botón
     public void disenoBotonNumero(Button b) {
+        contador--;
         b.setDisable(true);
         b.setStyle("-fx-background-color: #0b2901; -fx-border-color: #000000; -fx-text-fill: white");
     }
+
     public void disenoBotonCero(Button b) {
+        contador--;
         b.setDisable(true);
         b.setStyle("-fx-background-color: #83f861; -fx-border-color: #000000;");
     }
@@ -169,126 +180,131 @@ public class juegoController {
     public void abrirCeros(int f, int c) {
         //System.out.println(indiceDe(f,c)+" "+f+" "+c+" "+Implementacion.datoCasilla(f,c)+":"+Implementacion.datoBoton(f,c));
         Button b;
-        if(f!=1 && c!=1){ //sup izq
-            b=(Button) panelPrincipal.getChildren().get(indiceDe(f-1,c-1));
-            if(!b.isDisable()){
-                int dato = Implementacion.datoCasilla(f-1,c-1);
-                if(dato!=0){
+        if (f != 1 && c != 1) { //sup izq
+            b = (Button) panelPrincipal.getChildren().get(indiceDe(f - 1, c - 1));
+            if (!b.isDisable()) {
+                int dato = Implementacion.datoCasilla(f - 1, c - 1);
+                if (dato != 0) {
                     disenoBotonNumero(b);
-                    b.setText(dato+"");
-                }
-                else{
+                    b.setText(dato + "");
+                } else {
                     disenoBotonCero(b);
-                    abrirCeros(f-1,c-1);
+                    abrirCeros(f - 1, c - 1);
                 }
             }
         }
-        if(f!=1){ //sup
-            b=(Button) panelPrincipal.getChildren().get(indiceDe(f-1,c));
-            if(!b.isDisable()){
-                int dato = Implementacion.datoCasilla(f-1,c);
-                if(dato!=0){
+        if (f != 1) { //sup
+            b = (Button) panelPrincipal.getChildren().get(indiceDe(f - 1, c));
+            if (!b.isDisable()) {
+                int dato = Implementacion.datoCasilla(f - 1, c);
+                if (dato != 0) {
                     disenoBotonNumero(b);
-                    b.setText(dato+"");
-                }
-                else{
+                    b.setText(dato + "");
+                } else {
                     disenoBotonCero(b);
-                    abrirCeros(f-1,c);
+                    abrirCeros(f - 1, c);
                 }
             }
         }
-        if(f!=1 && c!=columnas){ //sup der
-            b=(Button) panelPrincipal.getChildren().get(indiceDe(f-1,c+1));
-            if(!b.isDisable()){
-                int dato = Implementacion.datoCasilla(f-1,c+1);
-                if(dato!=0){
+        if (f != 1 && c != columnas) { //sup der
+            b = (Button) panelPrincipal.getChildren().get(indiceDe(f - 1, c + 1));
+            if (!b.isDisable()) {
+                int dato = Implementacion.datoCasilla(f - 1, c + 1);
+                if (dato != 0) {
                     disenoBotonNumero(b);
-                    b.setText(dato+"");
-                }
-                else{
+                    b.setText(dato + "");
+                } else {
                     disenoBotonCero(b);
-                    abrirCeros(f-1,c+1);
+                    abrirCeros(f - 1, c + 1);
                 }
             }
         }
-        if(c!=1){ //izq
-            b=(Button) panelPrincipal.getChildren().get(indiceDe(f,c-1));
-            if(!b.isDisable()){
-                int dato = Implementacion.datoCasilla(f,c-1);
+        if (c != 1) { //izq
+            b = (Button) panelPrincipal.getChildren().get(indiceDe(f, c - 1));
+            if (!b.isDisable()) {
+                int dato = Implementacion.datoCasilla(f, c - 1);
                 //System.out.println(dato);
                 //System.out.println(indiceDe(f,c-1));
-                if(dato!=0){
+                if (dato != 0) {
                     disenoBotonNumero(b);
-                    b.setText(dato+"");
-                }
-                else{
+                    b.setText(dato + "");
+                } else {
                     disenoBotonCero(b);
-                    abrirCeros(f,c-1);
+                    abrirCeros(f, c - 1);
                 }
             }
         }
-        if(c!=columnas){ //der
-            b=(Button) panelPrincipal.getChildren().get(indiceDe(f,c+1));
-            if(!b.isDisable()){
-                int dato = Implementacion.datoCasilla(f,c+1);
-                if(dato!=0){
+        if (c != columnas) { //der
+            b = (Button) panelPrincipal.getChildren().get(indiceDe(f, c + 1));
+            if (!b.isDisable()) {
+                int dato = Implementacion.datoCasilla(f, c + 1);
+                if (dato != 0) {
                     disenoBotonNumero(b);
-                    b.setText(dato+"");
-                }
-                else{
+                    b.setText(dato + "");
+                } else {
                     disenoBotonCero(b);
-                    abrirCeros(f,c+1);
+                    abrirCeros(f, c + 1);
                 }
             }
         }
-        if(f!=filas && c!=1){ //inf izq
-            b=(Button) panelPrincipal.getChildren().get(indiceDe(f+1,c-1));
-            if(!b.isDisable()){
-                int dato = Implementacion.datoCasilla(f+1,c-1);
-                if(dato!=0){
+        if (f != filas && c != 1) { //inf izq
+            b = (Button) panelPrincipal.getChildren().get(indiceDe(f + 1, c - 1));
+            if (!b.isDisable()) {
+                int dato = Implementacion.datoCasilla(f + 1, c - 1);
+                if (dato != 0) {
                     disenoBotonNumero(b);
-                    b.setText(dato+"");
-                }
-                else{
+                    b.setText(dato + "");
+                } else {
                     disenoBotonCero(b);
-                    abrirCeros(f+1,c-1);
+                    abrirCeros(f + 1, c - 1);
                 }
             }
         }
-        if(f!=filas){ //inf
-            b=(Button) panelPrincipal.getChildren().get(indiceDe(f+1,c));
-            if(!b.isDisable()){
-                int dato = Implementacion.datoCasilla(f+1,c);
-                if(dato!=0){
+        if (f != filas) { //inf
+            b = (Button) panelPrincipal.getChildren().get(indiceDe(f + 1, c));
+            if (!b.isDisable()) {
+                int dato = Implementacion.datoCasilla(f + 1, c);
+                if (dato != 0) {
                     disenoBotonNumero(b);
-                    b.setText(dato+"");
-                }
-                else{
+                    b.setText(dato + "");
+                } else {
                     disenoBotonCero(b);
-                    abrirCeros(f+1,c);
+                    abrirCeros(f + 1, c);
                 }
             }
         }
-        if(f!=filas && c!=columnas){ //inf der
-            b=(Button) panelPrincipal.getChildren().get(indiceDe(f+1,c+1));
-            if(!b.isDisable()){
-                int dato = Implementacion.datoCasilla(f+1,c+1);
-                if(dato!=0){
+        if (f != filas && c != columnas) { //inf der
+            b = (Button) panelPrincipal.getChildren().get(indiceDe(f + 1, c + 1));
+            if (!b.isDisable()) {
+                int dato = Implementacion.datoCasilla(f + 1, c + 1);
+                if (dato != 0) {
                     disenoBotonNumero(b);
-                    b.setText(dato+"");
-                }
-                else{
+                    b.setText(dato + "");
+                } else {
                     disenoBotonCero(b);
-                    abrirCeros(f+1,c+1);
+                    abrirCeros(f + 1, c + 1);
                 }
             }
         }
     }
 
-    public int indiceDe(int f, int c){
-        return ((f-1)*columnas)+(c-1);
+    public int indiceDe(int f, int c) {
+        return ((f - 1) * columnas) + (c - 1);
     }
 
-
+    public void revisarContador(){
+        if(minas==contador){
+            panelPrincipal.setDisable(true);
+            cerrar_id.setVisible(true);
+            int[][] v = Implementacion.minas();
+            for (int i = 1; i <= v.length; i++) {
+                Button boton = (Button) panelPrincipal.getChildren().get((v[i - 1][0] - 1) * columnas + v[i - 1][1] - 1);
+                boton.setText(":D");
+                //boton.setDisable(true);
+                boton.setStyle("-fx-background-color: #a43900;-fx-text-fill: white; -fx-border-color: #000000");
+            }
+            JOptionPane.showMessageDialog(null,"¡Buen Juego!\nHas ganado la partida uwu");
+        }
+    }
 
 }

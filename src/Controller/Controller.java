@@ -26,6 +26,9 @@ public class Controller {
     @FXML
     private Button dimensionesButton;
 
+
+
+
     //acción sobre el botón fácil
     public void facil_action() throws IOException {
         activarBotones(false);

@@ -179,7 +179,7 @@ public class MatrizEnTripleta {
         Tripleta t = this.retornaTripleta(1);
         while (indice < this.numeroTripletas() && (t.retornaFila() != fila || t.retornaColumna() != columna)) {
             indice++;
-            if(indice < this.numeroTripletas()){
+            if(indice <= this.numeroTripletas()){
                 t = this.retornaTripleta(indice);
             }
         }
@@ -194,14 +194,14 @@ public class MatrizEnTripleta {
     public int buscarIndice(int fila, int columna) {
         int indice = 1;
         Tripleta t = this.retornaTripleta(1);
-        while (indice < this.numeroTripletas() && (t.retornaFila() != fila || t.retornaColumna() != columna)) {
+        while (indice <= this.numeroTripletas() && (t.retornaFila() != fila || t.retornaColumna() != columna)) {
             indice++;
-            if(indice < this.numeroTripletas()){
+            if(indice <= this.numeroTripletas()){
                 t = this.retornaTripleta(indice);
             }
         }
-        if(indice == this.numeroTripletas()){ //cuidado con el cero
-            return 0;
+        if(indice > this.numeroTripletas()){
+            return -1;
         }
         else {
             return indice;
@@ -234,7 +234,7 @@ public class MatrizEnTripleta {
 
     //obtiene el valor almacenado en i,j
     public int getDato(int f, int c){
-        if(buscarIndice(f,c)==0){
+        if(buscarIndice(f,c)==-1){
             return 0;
         }
         else{

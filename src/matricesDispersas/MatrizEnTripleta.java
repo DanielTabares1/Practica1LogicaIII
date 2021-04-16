@@ -173,8 +173,6 @@ public class MatrizEnTripleta {
         return false;
     }
 
-
-
     //busca un elemento con las fila y columna enviadas, retorna cero si no existe
     public int buscarPosicion(int fila, int columna) {
         int indice = 1;
@@ -236,7 +234,7 @@ public class MatrizEnTripleta {
 
     //obtiene el valor almacenado en i,j
     public int getDato(int f, int c){
-        if(buscarIndice(f,c)==0){  //cambiar por buscar indice
+        if(buscarIndice(f,c)==0){
             return 0;
         }
         else{

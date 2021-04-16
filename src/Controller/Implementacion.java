@@ -54,39 +54,39 @@ public class Implementacion {
         int suma = 0;
         if (m.existe(fila - 1, columna - 1) && (int) m.retornaTripleta(m.buscarPosicion(fila - 1, columna - 1)).retornaValor() == -1) {
             suma++;
-            //System.out.println("f:" + fila + "c:" + columna + "sup izq");
+            System.out.println("f:" + fila + "c:" + columna + "sup izq");
         }    //sup izq
         if (m.existe(fila - 1, columna) && (int) m.retornaTripleta(m.buscarPosicion(fila - 1, columna)).retornaValor() == -1) {
             suma++;
-            //System.out.println("f:" + fila + "c:" + columna + "sup");
+            System.out.println("f:" + fila + "c:" + columna + "sup");
         }    //sup
         if (m.existe(fila - 1, columna + 1) && (int) m.retornaTripleta(m.buscarPosicion(fila - 1, columna + 1)).retornaValor() == -1) {
             suma++;
-            //System.out.println("f:" + fila + "c:" + columna + "sup der");
+            System.out.println("f:" + fila + "c:" + columna + "sup der");
 
         }   //sup der
         if (m.existe(fila, columna - 1) && (int) m.retornaTripleta(m.buscarPosicion(fila, columna - 1)).retornaValor() == -1) {
             suma++;
-            //System.out.println("f:" + fila + "c:" + columna + "izq");
+            System.out.println("f:" + fila + "c:" + columna + "izq");
         }          //izq
         if (m.existe(fila, columna + 1) && (int) m.retornaTripleta(m.buscarPosicion(fila, columna + 1)).retornaValor() == -1) {
             suma++;
-            //System.out.println("f:" + fila + "c:" + columna + "der");
+            System.out.println("f:" + fila + "c:" + columna + "der");
 
         }          //der
         if (m.existe(fila + 1, columna - 1) && (int) m.retornaTripleta(m.buscarPosicion(fila + 1, columna - 1)).retornaValor() == -1) {
             suma++;
-            //System.out.println("f:" + fila + "c:" + columna + "inf izq");
+            System.out.println("f:" + fila + "c:" + columna + "inf izq");
 
         }   //inf izq
         if (m.existe(fila + 1, columna) && (int) m.retornaTripleta(m.buscarPosicion(fila + 1, columna)).retornaValor() == -1) {
             suma++;
-            //System.out.println("f:" + fila + "c:" + columna + "inf");
+            System.out.println("f:" + fila + "c:" + columna + "inf");
 
         }              //inf
         if (m.existe(fila + 1, columna + 1) && (int) m.retornaTripleta(m.buscarPosicion(fila + 1, columna + 1)).retornaValor() == -1) {
             suma++;
-            //System.out.println("f:" + fila + "c:" + columna + "inf der");
+            System.out.println("f:" + fila + "c:" + columna + "inf der");
 
         }   //inf der
         return suma;

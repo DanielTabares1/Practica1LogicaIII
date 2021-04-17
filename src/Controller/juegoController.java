@@ -1,10 +1,9 @@
 package Controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-
-import javax.swing.*;
 
 public class juegoController {
 
@@ -35,6 +34,7 @@ public class juegoController {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 Button b = new Button();
+                b.setMinSize(0,0);
                 b.setLayoutY(i * hBoton);
                 b.setLayoutX(j * wBoton);
                 b.setPrefWidth(wBoton);
@@ -80,9 +80,12 @@ public class juegoController {
                     Button boton = (Button) panelPrincipal.getChildren().get((v[i - 1][0] - 1) * columnas + v[i - 1][1] - 1);
                     boton.setText("KBOOM");
                     //boton.setDisable(true);
-                    boton.setStyle("-fx-background-color: #a42200;-fx-text-fill: white; -fx-border-color: #000000");
+                    boton.setStyle("-fx-background-color: #c30000;-fx-text-fill: white; -fx-border-color: #000000");
                 }
-                JOptionPane.showMessageDialog(null,"¡Lo sentimos!\nHas perdido la partida unu\nVuelve a intentarlo");
+                Alert a = new Alert(Alert.AlertType.INFORMATION,"¡Lo sentimos!\nHas perdido la partida unu\nVuelve a intentarlo");
+                a.setTitle("Usted ha pisado una mina");
+                a.setHeaderText("KBOOOOOM!!!");
+                a.show();
                 break;
             default:
                 b.setText(d + "");
@@ -97,13 +100,13 @@ public class juegoController {
     public void disenoBotonNumero(Button b) {
         contador--;
         b.setDisable(true);
-        b.setStyle("-fx-background-color: #0b2901; -fx-border-color: #000000; -fx-text-fill: white");
+        b.setStyle("-fx-background-color: #0b3900; -fx-border-color: #000000; -fx-text-fill: white");
     }
 
     public void disenoBotonCero(Button b) {
         contador--;
         b.setDisable(true);
-        b.setStyle("-fx-background-color: #83f861; -fx-border-color: #000000;");
+        b.setStyle("-fx-background-color: #84ef69; -fx-border-color: #000000");
     }
 
 
@@ -301,9 +304,12 @@ public class juegoController {
                 Button boton = (Button) panelPrincipal.getChildren().get((v[i - 1][0] - 1) * columnas + v[i - 1][1] - 1);
                 boton.setText(":D");
                 //boton.setDisable(true);
-                boton.setStyle("-fx-background-color: #a43900;-fx-text-fill: white; -fx-border-color: #000000");
+                boton.setStyle("-fx-background-color: #ff6600;-fx-text-fill: white; -fx-border-color: #000000");
             }
-            JOptionPane.showMessageDialog(null,"¡Buen Juego!\nHas ganado la partida uwu");
+            Alert a = new Alert(Alert.AlertType.INFORMATION,"Has ganado la partida uwu");
+            a.setTitle("¡Buen Juego!");
+            a.setHeaderText("Ganador!");
+            a.show();
         }
     }
 

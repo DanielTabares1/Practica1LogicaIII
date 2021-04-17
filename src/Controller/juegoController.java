@@ -1,9 +1,14 @@
 package Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+
+import java.io.IOException;
 
 public class juegoController {
 
@@ -13,6 +18,8 @@ public class juegoController {
     private Button cerrar_id;
     @FXML
     private Button abrir_id;
+    @FXML
+    private AnchorPane rootPane;
 
     public double hPanel, wPanel, hBoton, wBoton;   //variables del tamaño de panel  y botones
     public static int minas, filas, columnas, contador;       //filas, columnas y # de minas de la matriz
@@ -21,7 +28,6 @@ public class juegoController {
     public void comenzar_action() {
 
         abrir_id.setVisible(false);
-
 
         //se hacen calculos para el tamaño ideal de los botones según las dimensiones de la matriz
         hPanel = panelPrincipal.getHeight();
@@ -79,8 +85,9 @@ public class juegoController {
                 for (int i = 1; i <= v.length; i++) {
                     Button boton = (Button) panelPrincipal.getChildren().get((v[i - 1][0] - 1) * columnas + v[i - 1][1] - 1);
                     boton.setText("KBOOM");
-                    //boton.setDisable(true);
-                    boton.setStyle("-fx-background-color: #c30000;-fx-text-fill: white; -fx-border-color: #000000");
+                    String htext = (int)Math.floor(hBoton/2)+"";
+                    String style = "-fx-background-color: #c30000;-fx-text-fill: white; -fx-border-color: #000000; -fx-font-size: "+htext;
+                    boton.setStyle(style);
                 }
                 Alert a = new Alert(Alert.AlertType.INFORMATION,"¡Lo sentimos!\nHas perdido la partida unu\nVuelve a intentarlo");
                 a.setTitle("Usted ha pisado una mina");
@@ -100,18 +107,21 @@ public class juegoController {
     public void disenoBotonNumero(Button b) {
         contador--;
         b.setDisable(true);
-        b.setStyle("-fx-background-color: #0b3900; -fx-border-color: #000000; -fx-text-fill: white");
+        String htext = (int)Math.floor(hBoton/2)+"";
+        String style = "-fx-background-color: #9cff81; -fx-font-family: 'Segoe UI Black'; -fx-border-color: #000000; -fx-text-fill: black; -fx-font-size: "+htext;
+        b.setStyle(style);
     }
 
     public void disenoBotonCero(Button b) {
         contador--;
         b.setDisable(true);
-        b.setStyle("-fx-background-color: #84ef69; -fx-border-color: #000000");
+        b.setStyle("-fx-background-color: #9cff81; -fx-border-color: #000000");
     }
 
 
-    public void cerrar_action() {
-
+    public void cerrar_action() throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/sample.fxml"));
+        rootPane.getChildren().setAll(pane);
     }
 
     public void abrirPistas(int f, int c) {
@@ -303,7 +313,6 @@ public class juegoController {
             for (int i = 1; i <= v.length; i++) {
                 Button boton = (Button) panelPrincipal.getChildren().get((v[i - 1][0] - 1) * columnas + v[i - 1][1] - 1);
                 boton.setText(":D");
-                //boton.setDisable(true);
                 boton.setStyle("-fx-background-color: #ff6600;-fx-text-fill: white; -fx-border-color: #000000");
             }
             Alert a = new Alert(Alert.AlertType.INFORMATION,"Has ganado la partida uwu");

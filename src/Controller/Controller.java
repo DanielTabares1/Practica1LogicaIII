@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,6 +26,8 @@ public class Controller {
     private TextField minas_id;
     @FXML
     private Button dimensionesButton;
+    @FXML
+    private AnchorPane rootPane;
 
     //acción sobre el botón fácil
     public void facil_action() throws IOException {
@@ -32,7 +35,7 @@ public class Controller {
         filas = 8;
         columnas = 8;
         minas = 10;
-        lanzarJuego(new Stage());
+        lanzarJuego2();
     }
 
     //acción sobre el botón medio
@@ -41,7 +44,7 @@ public class Controller {
         filas = 16;
         columnas = 16;
         minas = 40;
-        lanzarJuego(new Stage());
+        lanzarJuego2();
     }
 
     //acción sobre el botón difícil
@@ -50,7 +53,7 @@ public class Controller {
         filas = 16;
         columnas = 30;
         minas = 99;
-        lanzarJuego(new Stage());
+        lanzarJuego2();
     }
 
     //acción sobre el botón personalizado
@@ -68,11 +71,13 @@ public class Controller {
 
     //acción del botón iniciar (personalizado)
     public void iniciar_action() throws IOException {
+        //todo----controlar y validar valores ingresados por el usuario
+
         System.out.println("acción");
         filas = Integer.parseInt(filas_id.getText());
         columnas = Integer.parseInt(columnas_id.getText());
         minas = Integer.parseInt(minas_id.getText());
-        lanzarJuego(new Stage());
+        lanzarJuego2();
     }
 
     //lanza el juego en una nueva ventana
@@ -84,6 +89,13 @@ public class Controller {
         Image ico = new Image("images/buscaminasicono.jpg");
         primaryStage.getIcons().add(ico);
 
+        juegoController.setValores(filas, columnas, minas);
+        Implementacion.setValores(filas, columnas, minas);
+    }
+
+    public void lanzarJuego2() throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/juego.fxml"));
+        rootPane.getChildren().setAll(pane);
         juegoController.setValores(filas, columnas, minas);
         Implementacion.setValores(filas, columnas, minas);
     }

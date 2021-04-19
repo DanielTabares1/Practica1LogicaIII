@@ -191,6 +191,7 @@ public class MatrizEnTripleta {
         }
     }
 
+    //busca un elemento con las fila y columna enviadas, retorna -1 si no existe
     public int buscarIndice(int fila, int columna) {
         int indice = 1;
         Tripleta t = this.retornaTripleta(1);

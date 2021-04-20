@@ -2,13 +2,13 @@ package Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+
 /*
 Esta clase se encarga de controlar lo relacionado con la vista del juego en ejecución
 y recibir las acciones del usuario en la interfaz
@@ -17,13 +17,13 @@ public class juegoController {
 
     //se establece una relación con los componentes de la vista
     @FXML
-    private Pane panelPrincipal; //contenedor de los botones
+    private Pane panelPrincipal;   //contenedor de los botones
     @FXML
-    private Button cerrar_id;
+    private Button cerrar_id;      //botón de cerrar
     @FXML
-    private Button abrir_id;
+    private Button abrir_id;       //botón de abrir tablero
     @FXML
-    private AnchorPane rootPane;
+    private AnchorPane rootPane;   //contenedor principal (ventana)
 
     //se definen valores generales para el tamaño de los botones y del panel principal
     public double hPanel, wPanel, hBoton, wBoton;

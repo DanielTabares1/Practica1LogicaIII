@@ -162,7 +162,6 @@ public class MatrizEnTripleta {
         }
         int i = 1;
         Tripleta ti = this.retornaTripleta(1);
-        // && i <= (int) this.retornaTripleta(0).retornaValor()
         while (ti != null) {
             if (ti.retornaFila() == fila && ti.retornaColumna() == columna) {
                 return true;
@@ -208,7 +207,6 @@ public class MatrizEnTripleta {
             return indice;
         }
     }
-
 
     public void mostrarMatrizCuadricula(){
         int[][] x = new int[v[0].retornaFila()][v[0].retornaColumna()];

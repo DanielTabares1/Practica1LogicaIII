@@ -2,9 +2,13 @@ package Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -42,7 +46,7 @@ public class juegoController {
     public void comenzar_action() {
         //se desactiva el botón que genera los elementos de la cuadrícula
         abrir_id.setVisible(false);
-        label_id.setText("¡Cuidado! hay "+minas+" minas.");
+        label_id.setText("¡Cuidado! hay " + minas + " minas.");
 
         //se hacen calculos para el tamaño ideal de los botones según las dimensiones de la matriz
         hPanel = panelPrincipal.getHeight();
@@ -55,12 +59,12 @@ public class juegoController {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 Button b = new Button();   //se crea un botón nuevo
-                b.setMinSize(0,0);   //su tamaño mínimo se define en cero
+                b.setMinSize(0, 0);   //su tamaño mínimo se define en cero
                 b.setLayoutY(i * hBoton);  //se define su posición y tamaño deacuerdo a los
                 b.setLayoutX(j * wBoton);  //valores hallados anteriormente
                 b.setPrefWidth(wBoton);
                 b.setPrefHeight(hBoton);
-                                            //se define un estilo(color de fondo y borde)
+                //se define un estilo(color de fondo y borde)
                 b.setStyle("-fx-background-color: #87cefa;" +
                         "-fx-border-color: black");
 
@@ -69,7 +73,7 @@ public class juegoController {
                 //y se agrega una acción pre definida para tomar al momento de recibir un click
                 b.setOnAction(actionEvent -> {
                     int id = panelPrincipal.getChildren().indexOf(b); //se obtien el id del elemento
-                                                                      //en el panel
+                    //en el panel
                     click(id, b); //se llama la función click, tomando el id y el botón mismo
                 });
             }
@@ -101,7 +105,7 @@ public class juegoController {
         switch (d) {
             case 0:      //caso cero (el elemento no está en la matriz)
                 disenoBotonCero(b); //se le da al botón un diseño particular de lso elementos sin
-                                    //algún tipo de dato particular en el juego (sin mina y sin número)
+                //algún tipo de dato particular en el juego (sin mina y sin número)
 
                 //se llama un método particular y recursivo que buscará los elementos que rodean
                 //dicha casilla descubriendo tanto números como otros "ceros"
@@ -122,17 +126,18 @@ public class juegoController {
                     //se obtiene el botón de la posición especificada
                     Button boton = (Button) panelPrincipal.getChildren().get((v[i - 1][0] - 1) * columnas + v[i - 1][1] - 1);
 
-                    boton.setText("KBOOM"); //se actualzia su texto
-
-                    String htext = (int)Math.floor(hBoton/2)+""; //se actualzia la altura del texto
+                    //se establece un ícono para el botón que representa la mina
+                    Image image = new Image("images/buscaminasicono.jpg", hBoton, hBoton, false, true);
+                    boton.setGraphic(new ImageView(image));
+                    boton.setPadding(Insets.EMPTY);
+                    boton.setAlignment(Pos.CENTER);
 
                     //se le da un estilo característico(color rojo) para hacer visible en pantalla todas las minas
-                    String style = "-fx-background-color: #c30000;-fx-text-fill: white; -fx-border-color: #000000; -fx-font-size: "+htext;
-                    boton.setStyle(style);
+                    boton.setStyle("-fx-background-color: #c30000; -fx-border-color: #000000");
                 }
 
                 //se crea y lanza un mensaje de alerta que indica el fin del juego
-                Alert a = new Alert(Alert.AlertType.INFORMATION,"¡Lo sentimos!\nHas perdido la partida unu\nVuelve a intentarlo");
+                Alert a = new Alert(Alert.AlertType.INFORMATION, "¡Lo sentimos!\nHas perdido la partida unu\nVuelve a intentarlo");
                 a.setTitle("Usted ha pisado una mina");
                 a.setHeaderText("KBOOOOOM!!!");
                 a.show();
@@ -150,10 +155,10 @@ public class juegoController {
     public void disenoBotonNumero(Button b) {
         contador--;            //se resta en 1 el contador de casillas abiertas
         b.setDisable(true);    //se descativa el botón para prevenir pulsarlo más de una vez
-        String htext = (int)Math.floor(hBoton/2)+""; //se calcula la altura correcta del texto interior
+        String htext = (int) Math.floor(hBoton / 2) + ""; //se calcula la altura correcta del texto interior
 
         //se le da un color verde claro en el fondo, bordes y texto negros y una fuente gruesa para ver mejor el número
-        String style = "-fx-background-color: #9cff81; -fx-font-family: 'Segoe UI Black'; -fx-border-color: #000000; -fx-text-fill: black; -fx-font-size: "+htext;
+        String style = "-fx-background-color: #9cff81; -fx-font-family: 'Segoe UI Black'; -fx-border-color: #000000; -fx-text-fill: black; -fx-font-size: " + htext;
         b.setStyle(style);
     }
 
@@ -381,9 +386,9 @@ public class juegoController {
     para así determinar si el usuario ya ha abierto todas las posibles casillas diferentes de
     minas y dar el mensaje de victoria terminando con el juego
      */
-    public void revisarContador(){
+    public void revisarContador() {
         //si el valor de minas es igual al del contador
-        if(minas==contador){
+        if (minas == contador) {
             panelPrincipal.setDisable(true); //se descativa el panel principal del juego
             cerrar_id.setVisible(true);      //se activa el botón para cerrar la ventana (volver a la vista principal)
             int[][] v = Implementacion.minas();//se obtiene un vector con los valores fila y columna de cada mina
@@ -391,12 +396,18 @@ public class juegoController {
             //para cada elemento del vector, se halla el botón correspondiente y se cambia su estilo
             for (int i = 1; i <= v.length; i++) {
                 Button boton = (Button) panelPrincipal.getChildren().get((v[i - 1][0] - 1) * columnas + v[i - 1][1] - 1);
-                boton.setText(":D");
-                boton.setStyle("-fx-background-color: #ff6600;-fx-text-fill: white; -fx-border-color: #000000");
+                //se cambia su color de fondo y bordes
+                boton.setStyle("-fx-background-color: #ff6600; -fx-border-color: #000000");
+
+                //y se establece la imagen que representa las minas
+                Image image = new Image("images/buscaminasicono.jpg", hBoton, hBoton, false, true);
+                boton.setGraphic(new ImageView(image));
+                boton.setPadding(Insets.EMPTY);
+                boton.setAlignment(Pos.CENTER);
             }
 
             //se crea y muestra en pantalla un mensaje de vistoria
-            Alert a = new Alert(Alert.AlertType.INFORMATION,"Has ganado la partida uwu");
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "Has ganado la partida uwu");
             a.setTitle("¡Buen Juego!");
             a.setHeaderText("Ganador!");
             a.show();

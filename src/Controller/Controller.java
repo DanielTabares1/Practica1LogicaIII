@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -78,10 +79,36 @@ public class Controller {
         //todo----controlar y validar valores ingresados por el usuario
 
         //se establecen los valores ingresados por el usuario
-        filas = Integer.parseInt(filas_id.getText());
-        columnas = Integer.parseInt(columnas_id.getText());
-        minas = Integer.parseInt(minas_id.getText());
-        lanzarJuego2(); //se lanza el juego con los valores recibidos
+        //con un try - catch se controla que los valores ingresados sean numéricos
+        try {
+            filas = Integer.parseInt(filas_id.getText());
+            columnas = Integer.parseInt(columnas_id.getText());
+            minas = Integer.parseInt(minas_id.getText());
+        } catch (NumberFormatException e) {
+            //si se detecta un formato diferente se muestra un mensaje de información
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Los valores ingresados deben ser numéricos.");
+            alert.setHeaderText("Formato de dato incorrecto");
+            alert.show();
+        }
+
+        //se establecen valores mínimos y máximos de filas, columnas y minas para asegurar una buena jugabilidad
+        if (filas < 3 || columnas < 3 || filas > 20 || columnas > 32 || minas < 5) {
+            //si se sobrepasan dichos límites se muestra un mensaje informativo
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Los datos deben estar dentro de los siguientes límites:" +
+                    "\nFilas: entre 3 y 20\nColumnas: entre 3 y 32\nminas: mínimo 5");
+            alert.show();
+        } else {
+            //para la cantidad máxima de minas se establece que debe haber almenos una casilla que no sea mina
+            if (minas > (filas * columnas) - 1) { //si la cantidad de minas sobrepasa el límite
+                int valor = (filas * columnas) - 1;
+                //se muestra un mensaje de alerta con el valor máximo posible para las dimensiones especificadas
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "El valor máximo de minas para las dimensiones\n" +
+                        "ingresadas es de " + valor);
+                alert.show();
+            } else { //si no hay problema con las condiciones establecidas se lanza el juego
+                lanzarJuego2();
+            }
+        }
     }
 
     //*****************POSIBLEMENTE SOBRA******************

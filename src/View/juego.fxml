@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="rootPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.juegoController">
    <children>
@@ -11,6 +12,10 @@
             <Pane fx:id="panelPrincipal" prefHeight="440.0" prefWidth="780.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0">
                <children>
+                  <Label fx:id="label_id">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
                   <Button fx:id="abrir_id" mnemonicParsing="false" onAction="#comenzar_action" text="Abrir tablero:" />
                   <Button fx:id="cerrar_id" mnemonicParsing="false" onAction="#cerrar_action" text="Cerrar" visible="false" />
                </children>

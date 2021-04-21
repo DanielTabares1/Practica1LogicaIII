@@ -2,7 +2,6 @@ package Controller;
 
 import matricesDispersas.MatrizEnTripleta;
 import matricesDispersas.Tripleta;
-
 import java.util.Random;
 
 public class Implementacion {

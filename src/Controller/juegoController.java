@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -24,6 +25,8 @@ public class juegoController {
     private Button abrir_id;       //botón de abrir tablero
     @FXML
     private AnchorPane rootPane;   //contenedor principal (ventana)
+    @FXML
+    private Label label_id;
 
     //se definen valores generales para el tamaño de los botones y del panel principal
     public double hPanel, wPanel, hBoton, wBoton;
@@ -39,6 +42,7 @@ public class juegoController {
     public void comenzar_action() {
         //se desactiva el botón que genera los elementos de la cuadrícula
         abrir_id.setVisible(false);
+        label_id.setText("¡Cuidado! hay "+minas+" minas.");
 
         //se hacen calculos para el tamaño ideal de los botones según las dimensiones de la matriz
         hPanel = panelPrincipal.getHeight();

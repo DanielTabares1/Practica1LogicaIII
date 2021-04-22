@@ -5,14 +5,12 @@ package matricesDispersas;
  * and open the template in the editor.
  */
 
-import matricesDispersas.Tripleta;
-
 /**
  * MatrizEnTripleta dispersa representada en forma de tripletas.
  */
 public class MatrizEnTripleta {
 
-    private Tripleta v[], aux[];
+    private Tripleta[] v;
 
     public MatrizEnTripleta(Tripleta t) {
         int n;
@@ -29,10 +27,7 @@ public class MatrizEnTripleta {
 
     public boolean esVacia() {
         Tripleta t = retornaTripleta(0);
-        if ((Integer) t.retornaValor() == 0) {
-            return true;
-        }
-        return false;
+        return (Integer) t.retornaValor() == 0;
     }
 
     public int numeroFilas() {
@@ -52,19 +47,14 @@ public class MatrizEnTripleta {
     }
 
     public void asignaNumeroTripletas(int datos) {
-        //System.out.println("Antiguo número de tripletas: " + numeroTripletas());
-        //System.out.println("Nuevo número de tripletas: " + datos);
-        int antiguo;
-        antiguo = numeroTripletas();
-        aux = v;
+        numeroTripletas();
+        Tripleta[] aux = v;
         Tripleta ti, tj;
         ti = aux[0];
         tj = new Tripleta(ti.retornaFila(), ti.retornaColumna(), datos);
         v = new Tripleta[datos + 2];
         v[0] = tj;
-        for (int i = 1; i < datos; i++) {
-            v[i] = aux[i];
-        }
+        if (datos - 1 >= 0) System.arraycopy(aux, 1, v, 1, datos - 1);
 
     }
 
@@ -78,7 +68,7 @@ public class MatrizEnTripleta {
         f = v[0].retornaFila();
         c = v[0].retornaColumna();
         val = (int) v[0].retornaValor();
-        System.out.println("\n\nCabeza: " + Integer.toString(f) + ", " + Integer.toString(c) + ", " + Double.toString(val));
+        System.out.println("\n\nCabeza: " + f + ", " + c + ", " + val);
         for (i = 1; i <= p; i++) {
             if (v[i] == null) {
                 System.err.println("Nulo en i: " + i);
@@ -88,7 +78,7 @@ public class MatrizEnTripleta {
             c = v[i].retornaColumna();
             val = (int) v[i].retornaValor();
             //Necesaria modificación para GUI.
-            System.out.println(Integer.toString(f) + ", " + Integer.toString(c) + ", " + Double.toString(val));
+            System.out.println(f + ", " + c + ", " + val);
         }
     }
 
@@ -97,12 +87,6 @@ public class MatrizEnTripleta {
             System.err.println("Tripleta vacía.");
             return;
         }
-        /*
-         if (i > numeroTripletas()) {
-         System.err.println("No existen tantas tripletas como: " + i + ", n = " + numeroTripletas());
-         return;
-         }
-         */
         int c = t.retornaColumna();
         int f = t.retornaFila();
         Tripleta nt;
@@ -110,7 +94,7 @@ public class MatrizEnTripleta {
             double val = (Double) t.retornaValor();
             nt = new Tripleta(f, c, val);
         } else {
-            nt = new Tripleta(f, c, (Integer) t.retornaValor());
+            nt = new Tripleta(f, c, t.retornaValor());
         }
         v[i] = nt;
     }
@@ -144,16 +128,6 @@ public class MatrizEnTripleta {
             j = j - 1;
         }
         v[i] = ti;
-    }
-
-    private int comparar(int numero1, int numero2) {
-        if (numero1 < numero2) {
-            return -1;
-        }
-        if (numero1 > numero2) {
-            return 1;
-        }
-        return 0;
     }
 
     public boolean existe(int fila, int columna) {
@@ -218,13 +192,12 @@ public class MatrizEnTripleta {
             x[f-1][c-1] = (int) t.retornaValor();
         }
 
-        for (int i = 0; i < x.length ; i++) {
-            for (int j = 0; j < x[0].length ; j++) {
-                if(x[i][j]==-1){
+        for (int[] ints : x) {
+            for (int j = 0; j < x[0].length; j++) {
+                if (ints[j] == -1) {
                     System.out.print(" x ");
-                }
-                else{
-                    System.out.print(" "+x[i][j]+" ");
+                } else {
+                    System.out.print(" " + ints[j] + " ");
                 }
             }
             System.out.println();
@@ -238,19 +211,7 @@ public class MatrizEnTripleta {
         }
         else{
             Tripleta t = v[buscarIndice(f,c)];
-            int d = (int)t.retornaValor();
-            return d;
-        }
-    }
-
-    public int getDatoBoton(int f, int c){
-        if(buscarPosicion(f,c)==0){
-            return 0;
-        }
-        else{
-            Tripleta t = v[buscarPosicion(f,c)];
-            int d = (int)t.retornaValor();
-            return d;
+            return (int)t.retornaValor();
         }
     }
 

@@ -119,11 +119,6 @@ public class Implementacion {
         return m.getDato(f, c);
     }
 
-    //obtiene el dato de una casilla al pasarle las correspondientes fila y columna
-    public static int datoBoton(int f, int c) {
-        return m.getDatoBoton(f, c);
-    }
-
     //retorna un vector con los valores fila y columna de cada mina en la matriz
     public static int[][] minas() {
         int[][] v = new int[minas][2];  //crea un vector de dimensiones minas * 2

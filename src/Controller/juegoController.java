@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -127,7 +128,7 @@ public class juegoController {
                     Button boton = (Button) panelPrincipal.getChildren().get((v[i - 1][0] - 1) * columnas + v[i - 1][1] - 1);
 
                     //se establece un ícono para el botón que representa la mina
-                    Image image = new Image("images/buscaminasicono.jpg", hBoton, hBoton, false, true);
+                    Image image = new Image("images/Bomba.png", hBoton, hBoton, false, true);
                     boton.setGraphic(new ImageView(image));
                     boton.setPadding(Insets.EMPTY);
                     boton.setAlignment(Pos.CENTER);
@@ -140,6 +141,15 @@ public class juegoController {
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "¡Lo sentimos!\nHas perdido la partida unu\nVuelve a intentarlo");
                 a.setTitle("Usted ha pisado una mina");
                 a.setHeaderText("KBOOOOOM!!!");
+                ImageView ganar = new ImageView("/images/perdedor.png");
+                // The standard Alert icon size is 48x48, so let's resize our icon to match
+                ganar.setFitHeight(48);
+                ganar.setFitWidth(48);
+                // Set our new ImageView as the alert's icon
+                a.getDialogPane().setGraphic(ganar);
+                Image ico = new Image("images/buscaminasicono.jpg");
+                Stage stage = (Stage) a.getDialogPane().getScene().getWindow();
+                stage.getIcons().add(ico);
                 a.show();
                 break;
             default: //caso default (un número)
@@ -178,72 +188,6 @@ public class juegoController {
         //obtiene el archivo de la vista principal (sample.fxml) y lo carga en un panel
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/sample.fxml"));
         rootPane.getChildren().setAll(pane); //muestra la vista sobre el contenedor principal de la ventana
-    }
-
-    public void abrirPistas(int f, int c) {
-        int n = 8 - Implementacion.minasAlRededor(f, c);
-        int[][] v = new int[n][2];
-        v = localizacion(v, f, c);
-        for (int i = 0; i < n; i++) {
-            Button b = (Button) panelPrincipal.getChildren().get((v[i][0] - 1) * columnas + v[i][1] - 1);
-            if (!b.isDisable()) {
-                b.setDisable(true);
-                if (Implementacion.minasAlRededor(v[i][0], v[i][1]) == 0) {
-                    abrirPistas(v[i][0], v[i][1]);
-                }
-            }
-        }
-
-    }
-
-    public int[][] localizacion(int[][] v, int fila, int columna) {
-        int i = 0;
-        if (Implementacion.m.existe(fila - 1, columna - 1) && (int) Implementacion.m.retornaTripleta(Implementacion.m.buscarPosicion(fila - 1, columna - 1)).retornaValor() != -1) {
-            v[i][0] = fila - 1;
-            v[i][1] = columna - 1;
-            i++;
-        }    //sup izq
-        if (Implementacion.m.existe(fila - 1, columna) && (int) Implementacion.m.retornaTripleta(Implementacion.m.buscarPosicion(fila - 1, columna)).retornaValor() != -1) {
-            v[i][0] = fila - 1;
-            v[i][1] = columna;
-            i++;
-        }    //sup
-        if (Implementacion.m.existe(fila - 1, columna + 1) && (int) Implementacion.m.retornaTripleta(Implementacion.m.buscarPosicion(fila - 1, columna + 1)).retornaValor() != -1) {
-            v[i][0] = fila - 1;
-            v[i][1] = columna + 1;
-            i++;
-
-        }   //sup der
-        if (Implementacion.m.existe(fila, columna - 1) && (int) Implementacion.m.retornaTripleta(Implementacion.m.buscarPosicion(fila, columna - 1)).retornaValor() != -1) {
-            v[i][0] = fila;
-            v[i][1] = columna - 1;
-            i++;
-        }          //izq
-        if (Implementacion.m.existe(fila, columna + 1) && (int) Implementacion.m.retornaTripleta(Implementacion.m.buscarPosicion(fila, columna + 1)).retornaValor() != -1) {
-            v[i][0] = fila;
-            v[i][1] = columna + 1;
-            i++;
-
-        }          //der
-        if (Implementacion.m.existe(fila + 1, columna - 1) && (int) Implementacion.m.retornaTripleta(Implementacion.m.buscarPosicion(fila + 1, columna - 1)).retornaValor() != -1) {
-            v[i][0] = fila + 1;
-            v[i][1] = columna - 1;
-            i++;
-
-        }   //inf izq
-        if (Implementacion.m.existe(fila + 1, columna) && (int) Implementacion.m.retornaTripleta(Implementacion.m.buscarPosicion(fila + 1, columna)).retornaValor() != -1) {
-            v[i][0] = fila + 1;
-            v[i][1] = columna;
-            i++;
-
-        }              //inf
-        if (Implementacion.m.existe(fila + 1, columna + 1) && (int) Implementacion.m.retornaTripleta(Implementacion.m.buscarPosicion(fila + 1, columna + 1)).retornaValor() != -1) {
-            v[i][0] = fila + 1;
-            v[i][1] = columna + 1;
-            i++;
-
-        }   //inf der
-        return v;
     }
 
     /*
@@ -311,8 +255,6 @@ public class juegoController {
             b = (Button) panelPrincipal.getChildren().get(indiceDe(f, c - 1));
             if (!b.isDisable()) {
                 int dato = Implementacion.datoCasilla(f, c - 1);
-                //System.out.println(dato);
-                //System.out.println(indiceDe(f,c-1));
                 if (dato != 0) {
                     disenoBotonNumero(b);
                     b.setText(dato + "");
@@ -400,7 +342,7 @@ public class juegoController {
                 boton.setStyle("-fx-background-color: #ff6600; -fx-border-color: #000000");
 
                 //y se establece la imagen que representa las minas
-                Image image = new Image("images/buscaminasicono.jpg", hBoton, hBoton, false, true);
+                Image image = new Image("images/Bomba.png", hBoton, hBoton, false, true);
                 boton.setGraphic(new ImageView(image));
                 boton.setPadding(Insets.EMPTY);
                 boton.setAlignment(Pos.CENTER);
@@ -410,6 +352,15 @@ public class juegoController {
             Alert a = new Alert(Alert.AlertType.INFORMATION, "Has ganado la partida uwu");
             a.setTitle("¡Buen Juego!");
             a.setHeaderText("Ganador!");
+            ImageView ganar = new ImageView("/images/ganador.png");
+            // The standard Alert icon size is 48x48, so let's resize our icon to match
+            ganar.setFitHeight(48);
+            ganar.setFitWidth(48);
+            // Set our new ImageView as the alert's icon
+            a.getDialogPane().setGraphic(ganar);
+            Image ico = new Image("images/buscaminasicono.jpg");
+            Stage stage = (Stage) a.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(ico);
             a.show();
         }
     }

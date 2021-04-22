@@ -70,7 +70,7 @@ public class Conjunto extends ListaSimple implements Serializable {
         //Se verifica que se cumpla la condición de que si existe en el segundo 
         //conjunto, no se tome en cuenta en el nuevo.
         while (p != null) {
-            dato = (Object) p.retornaDato();
+            dato = p.retornaDato();
             if (!existe(dato)) {
                 nuevoConjunto.agregar(dato);
                 modificaciones = modificaciones + 1;
@@ -98,7 +98,7 @@ public class Conjunto extends ListaSimple implements Serializable {
         NodoSimple nodoActual = primero;
         Object dato;
         while (nodoActual != null) {
-            dato = (Object) nodoActual.retornaDato();
+            dato = nodoActual.retornaDato();
             nuevo.agregar(dato);
             nodoActual = nodoActual.retornaLiga();
         }
@@ -139,11 +139,11 @@ public class Conjunto extends ListaSimple implements Serializable {
      */
     @Override
     public String toString() {
-        String cadena = "";
+        StringBuilder cadena = new StringBuilder();
         for (NodoSimple p = primero; p != null; p = p.retornaLiga()) {
-            cadena = cadena + p.retornaDato().toString();
+            cadena.append(p.retornaDato().toString());
         }
-        return cadena;
+        return cadena.toString();
     }
     
     public boolean esDisjunto(Conjunto B) {

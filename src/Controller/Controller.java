@@ -2,14 +2,10 @@ package Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -109,20 +105,6 @@ public class Controller {
                 lanzarJuego2();
             }
         }
-    }
-
-    //*****************POSIBLEMENTE SOBRA******************
-    //método que lanza el juego en una nueva ventana
-    public void lanzarJuego(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../View/juego.fxml"));
-        primaryStage.setScene(new Scene(root, 800, 500));
-        primaryStage.setTitle("Buscaminas Beta v.1.0.0");
-        primaryStage.show();
-        Image ico = new Image("images/buscaminasicono.jpg");
-        primaryStage.getIcons().add(ico);
-
-        juegoController.setValores(filas, columnas, minas);
-        Implementacion.setValores(filas, columnas, minas);
     }
 
     //método que lanza el juego carganado la escena en la misma ventana

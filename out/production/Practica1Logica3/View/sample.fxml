@@ -5,39 +5,64 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="rootPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
-   <children>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-         <children>
-            <ImageView fitHeight="295.0" fitWidth="295.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <image>
-                  <Image url="@../images/portadabomba.png" />
-               </image>
-               <effect>
-                  <Blend />
-               </effect>
-            </ImageView>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
-              <buttons>
-                <Button fx:id="facil_button" mnemonicParsing="false" onAction="#facil_action" text="Fácil" />
-                  <Button fx:id="medio_button" mnemonicParsing="false" onAction="#medio_action" text="Medio" />
-                  <Button fx:id="dificil_button" mnemonicParsing="false" onAction="#dificil_action" text="Difícil" />
-                  <Button fx:id="personalizado_button" mnemonicParsing="false" onAction="#personalizado_action" text="Personalizado" />
-              </buttons>
-            </ButtonBar>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <TextField fx:id="filas_id" disable="true" promptText="Ingrese las filas" />
-                  <TextField fx:id="columnas_id" disable="true" promptText="Ingrese las columnas" />
-                  <TextField fx:id="minas_id" disable="true" promptText="Ingrese las minas" />
-                  <Button fx:id="dimensionesButton" disable="true" mnemonicParsing="false" onAction="#iniciar_action" text="Iniciar:" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <ImageView fitHeight="305.0" fitWidth="295.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <effect>
+            <Blend />
+         </effect>
+         <Image url="@../images/portadabomba.png" />
+      </ImageView>
+      <Text smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscaminas" textAlignment="CENTER" wrappingWidth="500.0">
+         <font>
+            <Font name="Times New Roman Bold" size="75.0" />
+         </font>
+         <fill>
+            <RadialGradient focusAngle="34.29" focusDistance="-0.37209302325581395" radius="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.2542955326460481">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.7594501718213058">
+                     <color>
+                        <Color red="0.5921052694320679" green="0.010964912362396717" blue="0.010964912362396717" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="0.6610339283943176" blue="0.11574073880910873" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+         <buttons>
+            <Button fx:id="facil_button" mnemonicParsing="false" onAction="#facil_action" text="Fácil" />
+            <Button fx:id="medio_button" mnemonicParsing="false" onAction="#medio_action" text="Medio" />
+            <Button fx:id="dificil_button" mnemonicParsing="false" onAction="#dificil_action" text="Difícil" />
+            <Button fx:id="personalizado_button" mnemonicParsing="false" onAction="#personalizado_action" text="Personalizado" />
+         </buttons>
+      </ButtonBar>
+      <HBox prefHeight="35.0" prefWidth="780.0">
+         <TextField fx:id="filas_id" disable="true" promptText="Ingrese las filas" />
+         <TextField fx:id="columnas_id" disable="true" promptText="Ingrese las columnas" />
+         <TextField fx:id="minas_id" disable="true" promptText="Ingrese las minas" />
+         <Button fx:id="dimensionesButton" disable="true" mnemonicParsing="false" onAction="#iniciar_action" text="Iniciar:" />
+      </HBox>
+   </VBox>
 </AnchorPane>
